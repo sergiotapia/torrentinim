@@ -32,6 +32,7 @@ proc pageUrls(): seq[string] =
 proc downloadUrl(url: string): string =
     var client = newHttpClient()
     echo &"[1337x] Download html: {url}"
+    sleep(200)
     return client.getContent(url)
 
 proc extractTorrentLinks(html: string): seq[string] =
