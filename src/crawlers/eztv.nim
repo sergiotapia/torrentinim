@@ -25,7 +25,7 @@ proc fetchLatest*() =
         torrent.leechers = parseInt(item_node.child("torrent:peers").innerText)
         for ic in item_node.child("torrent:magnetURI").items:
             torrent.magnet_url = ic.text
-        echo torrent
+        # echo torrent
         # discard insert_torrent(torrent)
 
     sleep(10000)
