@@ -7,11 +7,11 @@ import strutils
 import "../torrents"
 import "../torrents/torrent"
 
-
 proc fetchXml(): XmlNode =
-  var client = newHttpClient()
+  let client = newHttpClient()
   let xml = client.getContent("https://eztv.io/ezrss.xml")
   let xmlStream = newStringStream(xml)
+  client.close()
   return parseXML(xmlStream)
 
 proc fetchLatest*() =
