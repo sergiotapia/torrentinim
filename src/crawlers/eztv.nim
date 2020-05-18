@@ -21,6 +21,7 @@ proc fetchLatest*() =
   for item_node in xmlRoot.findAll("item"):
     var torrent: Torrent = newTorrent()
     torrent.name = item_node.child("title").innerText
+    torrent.source = "eztv"
     torrent.canonical_url = item_node.child("link").innerText
     torrent.size = item_node.child("torrent:contentLength").innerText
     torrent.seeders = parseInt(item_node.child("torrent:seeds").innerText)

@@ -22,6 +22,7 @@ proc initDatabase*(): string =
                   id            INTEGER PRIMARY KEY,
                   uploaded_at   DATETIME NOT NULL,
                   name          TEXT NOT NULL,
+                  source        TEXT NOT NULL,
                   canonical_url TEXT NOT NULL,
                   magnet_url    TEXT NOT NULL,
                   size          TEXT NOT NULL,
@@ -31,6 +32,7 @@ proc initDatabase*(): string =
   db.exec(sql"""CREATE UNIQUE INDEX torrents_unique_canonical_url ON torrents(canonical_url)""")
   db.exec(sql"""CREATE INDEX torrents_name ON torrents(name)""")
   db.exec(sql"""CREATE INDEX torrents_uploaded_at ON torrents(uploaded_at)""")
+  db.exec(sql"""CREATE INDEX torrents_source ON torrents(source)""")
   db.close()
 
 # proc latest*(limit: int): seq[Torrent] =

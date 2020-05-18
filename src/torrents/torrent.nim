@@ -3,6 +3,7 @@ import times
 type
   Torrent* = object
     name*: string
+    source*: string
     uploaded_at*: DateTime
     canonical_url*: string
     magnet_url*: string

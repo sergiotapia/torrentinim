@@ -9,7 +9,7 @@ import htmlparser
 import strtabs # To access XmlAttributes
 import strutils # To use cmpIgnoreCase
 import nimquery
-
+import "../torrents"
 import "../torrents/torrent"
 
 proc pageUrls(): seq[string] =
@@ -31,8 +31,7 @@ proc pageUrls(): seq[string] =
 
 proc downloadUrl(url: string): string =
     var client = newHttpClient()
-    echo &"Download html: {url}"
-    sleep(500)
+    echo &"[1337x] Download html: {url}"
     return client.getContent(url)
 
 proc extractTorrentLinks(html: string): seq[string] =
@@ -81,6 +80,7 @@ proc extractTorrentInformation(link: string): Torrent =
     var leechers = html.querySelector(".leeches").innerText.parseInt
 
     torrent.name = name
+    torrent.source = "1337x"
     torrent.canonical_url = link
     torrent.magnet_url = magnet_url
     torrent.size = size
@@ -89,18 +89,15 @@ proc extractTorrentInformation(link: string): Torrent =
 
     return torrent
 
-proc latest*() =
-    echo "[1337x] Starting 1337x crawl"
-    var pages = pageUrls()
-    for url in pages:
-        var categoryPageHtml = downloadUrl(url)
-        var torrentLinks = extractTorrentLinks(categoryPageHtml)
-        for link in torrentLinks:
-          echo link
-            # discard insert_torrent(extractTorrentInformation(link))
+proc fetchLatest*() =
+  echo "[1337x] Starting 1337x crawl"
+  var pages = pageUrls()
+  for url in pages:
+    var categoryPageHtml = downloadUrl(url)
+    var torrentLinks = extractTorrentLinks(categoryPageHtml)
+    for link in torrentLinks:
+      let torrent = extractTorrentInformation(link)
+      discard insert_torrent(torrent)
 
-    sleep(10000)
-    latest()
-
-proc start_crawl*() =
-    latest()
+  sleep(10000)
+  fetchLatest()
