@@ -1,8 +1,9 @@
 import htmlgen
 import jester
+from "./crawlers/eztv" import nil
 
 when isMainModule:
-  echo("Hello, World!")
+  eztv.fetchLatest()
 
   routes:
     get "/":
