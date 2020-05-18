@@ -29,8 +29,24 @@ site? Please open a Github Issue in this repo.
 ### Usage Guide
 
 Torrentinim was designed to be painless to run. You download an executable, and run it. Done.
+It will start slurping up data from supported sources automatically.
 
-# TODO: Link to platform releases here. Mac, Windows and Linux.
+The `init` flag initializes the database. All subsequent runs should not include `init` or you
+will nuke your entire database.
+
+```
+$ ./torrentinim init
+INFO Jester is making jokes at http://0.0.0.0:5000
+Starting 1 threads
+```
+
+Subsequent runs, don't use the `init` flag!
+
+```
+$ ./torrentinim
+INFO Jester is making jokes at http://0.0.0.0:5000
+Starting 1 threads
+```
 
 ### Community
 
