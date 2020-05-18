@@ -12,3 +12,5 @@ bin           = @["torrentinim"]
 # Dependencies
 
 requires "nim >= 1.2.0"
+requires "jester >= 0.4.3"
+requires "nimquery >= 1.2.2"
