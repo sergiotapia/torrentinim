@@ -33,22 +33,6 @@ proc initDatabase*(): string =
   db.exec(sql"""CREATE INDEX torrents_uploaded_at ON torrents(uploaded_at)""")
   db.close()
 
-
-# proc insert_torrent*(torrent: Torrent): bool =
-#   echo &"[database] Saving torrent: {torrent}"
-
-#   let db = open("torrentinim-data.db", "", "", "")
-#   result = db.tryInsertID(sql"INSERT INTO torrents (uploaded_at, name, canonical_url, magnet_url, size, seeders, leechers) VALUES (?, ?, ?, ?, ?, ?, ?)",
-#     torrent.uploaded_at,
-#     torrent.name,
-#     torrent.canonical_url,
-#     torrent.magnet_url,
-#     torrent.size,
-#     torrent.seeders,
-#     torrent.leechers
-#   ) != -1
-#   db.close()
-
 # proc latest*(limit: int): seq[Torrent] =
 #   let db = open("torrentinim-data.db", "", "", "")
 #   let torrents = db.getAllRows(sql"SELECT name, uploaded_at, canonical_url, magnet_url, size, seeders, leechers FROM torrents LIMIT ?", limit)

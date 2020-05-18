@@ -16,13 +16,15 @@ the initial set of working features, I'll remove this notice and add screenshots
 - Easy to understand source code. Special care is taken to keep code lean and understandable. No code golf here.
 - High performance, extremely low memory footprint.
 
-On average the application (1MB size) uses about 6MB of RAM:
+On average the application **(1MB size)** uses about **6MB of RAM**:
 
-# TODO: Take screenshot of the application's memory usage after 24 hours being up and running.
+<img width="212" alt="Screen Shot 2020-05-17 at 11 47 03 PM" src="https://user-images.githubusercontent.com/686715/82172638-bf4a7400-9898-11ea-809d-02bb2a0c00d3.png">
 
-We work closely with other providers and search engines to be respectful of their hardware and minimize our impact to their systems.
+<img width="278" alt="Screen Shot 2020-05-17 at 11 45 37 PM" src="https://user-images.githubusercontent.com/686715/82172601-a6da5980-9898-11ea-92a3-6be4087d93cb.png">
 
-If you'd like us to add you to our supported vendors list, please drop us a Github Issue.
+We work closely with other providers and search engines to be respectful of their
+hardware and minimize our impact to their systems. Want torrentinim to support your
+site? Please open a Github Issue in this repo.
 
 ### Usage Guide
 

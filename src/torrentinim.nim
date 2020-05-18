@@ -1,13 +1,15 @@
 import htmlgen
 import jester
-from "./crawlers/eztv" import nil
 import "database"
+import "./helpers/datetime"
+from "./crawlers/eztv" import nil
+
 
 when isMainModule:
   if (initRequested()):
     discard initDatabase()
 
-  # eztv.fetchLatest()
+  eztv.fetchLatest()
 
   routes:
     get "/":
