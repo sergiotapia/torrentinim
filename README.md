@@ -68,3 +68,7 @@ The following websites are fully supported.
 
 - 1337x.to
 - EZTV
+- Nyaa
+- NyaaPantsu
+- TorrentDownloads.me
+- YTS
