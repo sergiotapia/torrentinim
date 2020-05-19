@@ -7,6 +7,8 @@ from "./crawlers/eztv" import nil
 from "./crawlers/leetx.nim" import nil
 from "./crawlers/nyaa.nim" import nil
 from "./crawlers/nyaa_pantsu.nim" import nil
+from "./crawlers/yts.nim" import nil
+from "./crawlers/torrent_downloads.nim" import nil
 
 
 when isMainModule:
@@ -17,6 +19,8 @@ when isMainModule:
   spawn leetx.fetchLatest()
   spawn nyaa.fetchLatest()
   spawn nyaa_pantsu.fetchLatest()
+  # spawn yts.fetchLatest()
+  spawn torrentdownloads.fetchLatest()
 
   routes:
     get "/":
