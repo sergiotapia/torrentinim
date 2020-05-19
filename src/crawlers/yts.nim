@@ -22,9 +22,7 @@ proc fetchLatest*() =
   var xmlRoot = fetchXml()
   for item_node in xmlRoot.child("channel").findAll("item"):
     var torrent: Torrent = newTorrent()
-    # torrent.name = item_node.child("title").kind()
-    echo item_node.child("title").innerText()
-    echo item_node.rawText()
+    torrent.name = item_node.child("title")[0].text()
     torrent.source = "yts"
     torrent.canonical_url = item_node.child("link").innerText
     torrent.seeders = 0

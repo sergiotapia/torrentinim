@@ -19,7 +19,7 @@ when isMainModule:
   spawn leetx.fetchLatest()
   spawn nyaa.fetchLatest()
   spawn nyaa_pantsu.fetchLatest()
-  # spawn yts.fetchLatest()
+  spawn yts.fetchLatest()
   spawn torrentdownloads.fetchLatest()
 
   routes:
