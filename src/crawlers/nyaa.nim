@@ -17,7 +17,7 @@ proc fetchXml(): XmlNode =
   return parseXML(xmlStream)
 
 proc fetchLatest*() =
-  echo "[nyaa] Starting EZTV crawl"
+  echo "[nyaa] Starting Nyaa crawl"
 
   var xmlRoot = fetchXml()
   for item_node in xmlRoot.child("channel").findAll("item"):
