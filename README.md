@@ -1,5 +1,8 @@
 # Torrentinim
 
+Note: I'm going to rewrite this using the new Prologue nim web framework to get better structure
+here.
+
 Torrentinim is a self-hosted API-only, low memory footprint, torrent search engine.
 
 _This is a work in progress as I learn Nim, and build out more features. Once I complete
