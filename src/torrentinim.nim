@@ -15,13 +15,20 @@ when isMainModule:
   if (initRequested()):
     discard initDatabase()
 
-  spawn eztv.fetchLatest()
-  spawn leetx.fetchLatest()
-  spawn nyaa.fetchLatest()
-  spawn nyaa_pantsu.fetchLatest()
-  spawn yts.fetchLatest()
-  spawn torrentdownloads.fetchLatest()
+  asyncCheck eztv.startCrawl()
+  asyncCheck leetx.startCrawl()
 
-  routes:
-    get "/":
-      resp h1("Hello world")
+  runForever()
+  
+  # spawn nyaa.fetchLatest()
+  # spawn nyaa_pantsu.fetchLatest()
+  # spawn yts.fetchLatest()
+  # spawn torrentdownloads.fetchLatest()
+
+  # routes:
+  #   get "/":
+  #     resp h1("Hello world")
+
+  
+  
+  

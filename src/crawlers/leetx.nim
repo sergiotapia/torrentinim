@@ -9,6 +9,7 @@ import htmlparser
 import strtabs # To access XmlAttributes
 import strutils # To use cmpIgnoreCase
 import nimquery
+import asyncdispatch
 import "../torrents"
 import "../torrents/torrent"
 
@@ -29,11 +30,11 @@ proc pageUrls(): seq[string] =
         &"https://1337x.to/cat/{category}/1/"
     )
 
-proc downloadUrl(url: string): string =
+proc downloadUrl(url: string): Future[string] {.async} =
     echo &"[1337x] Download html: {url}"
-    sleep(200)
-    let client = newHttpClient()
-    let content = client.getContent(url)
+    await sleepAsync(200)
+    let client = newAsyncHttpClient()
+    let content = await client.getContent(url)
     client.close()
     return content
 
@@ -48,10 +49,10 @@ proc extractTorrentLinks(html: string): seq[string] =
         &"https://1337x.to{link}"
     )
 
-proc extractTorrentInformation(link: string): Torrent =
+proc extractTorrentInformation(link: string): Future[Torrent] {.async} =
     var torrent: Torrent = newTorrent()
 
-    let torrentHtml = downloadUrl(link)
+    let torrentHtml = await downloadUrl(link)
     let html = parseHtml(torrentHtml)
 
     # Fetch the name
@@ -92,15 +93,17 @@ proc extractTorrentInformation(link: string): Torrent =
 
     return torrent
 
-proc fetchLatest*() =
+proc fetchLatest*() {.async} =
   echo "[1337x] Starting 1337x crawl"
   var pages = pageUrls()
   for url in pages:
-    var categoryPageHtml = downloadUrl(url)
+    var categoryPageHtml = await downloadUrl(url)
     var torrentLinks = extractTorrentLinks(categoryPageHtml)
     for link in torrentLinks:
-      let torrent = extractTorrentInformation(link)
+      let torrent = await extractTorrentInformation(link)
       discard insert_torrent(torrent)
 
-  sleep(10000)
-  fetchLatest()
+proc startCrawl*() {.async} =
+  while true:
+    await sleepAsync(10000)
+    await fetchLatest()  
