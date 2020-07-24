@@ -28,3 +28,4 @@ when isMainModule:
   let port = Port 5000
   var jesterServer = initJester(apiRouter, settings=newSettings(port=port))
   jesterServer.serve()
+  
