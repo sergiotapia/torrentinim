@@ -1,10 +1,7 @@
 import httpClient
-import streams
-import xmlparser
 import xmltree
-import sequtils, sugar
+import sequtils
 import strformat
-import os
 import htmlparser
 import strtabs # To access XmlAttributes
 import strutils # To use cmpIgnoreCase

@@ -2,7 +2,6 @@ import httpClient
 import streams
 import xmlparser
 import xmltree
-import os
 import strutils
 import asyncdispatch
 import "../torrents"

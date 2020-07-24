@@ -3,7 +3,6 @@ import streams
 import strformat
 import xmlparser
 import xmltree
-import os
 import strutils
 import filesize
 import asyncdispatch
