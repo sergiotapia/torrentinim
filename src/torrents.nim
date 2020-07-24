@@ -3,7 +3,7 @@ import strformat
 import "./torrents/torrent"
 
 proc insert_torrent*(torrent: Torrent): bool =
-  echo &"[database] Upserting torrent: {torrent}"
+  echo &"[{torrent.source}] Inserting torrent: {torrent.name}"
 
   let db = open("torrentinim-data.db", "", "", "")
   result = db.tryInsertID(sql"INSERT INTO torrents (uploaded_at, name, source, canonical_url, magnet_url, size, seeders, leechers) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",

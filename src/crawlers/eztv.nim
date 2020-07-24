@@ -34,5 +34,8 @@ proc fetchLatest*() {.async} =
 
 proc startCrawl*() {.async} =
   while true:
-    await sleepAsync(10000)
-    await fetchLatest()
+    try:
+      await fetchLatest()
+      await sleepAsync(30000)
+    except:
+      echo "[eztv] Crawler error, restarting..."

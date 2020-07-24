@@ -10,24 +10,21 @@ from "./crawlers/nyaa_pantsu.nim" import nil
 from "./crawlers/yts.nim" import nil
 from "./crawlers/torrent_downloads.nim" import nil
 
-router api:
-  get "/":
-    resp h1("Hello world!")
-
 when isMainModule:
   if (initRequested()):
     discard initDatabase()
 
   asyncCheck eztv.startCrawl()
   asyncCheck leetx.startCrawl()
-
-  # runForever()
+  asyncCheck nyaa.startCrawl()
+  asyncCheck nyaa_pantsu.startCrawl()
+  asyncCheck yts.startCrawl()
+  asyncCheck torrentdownloads.startCrawl()
   
-  # spawn nyaa.fetchLatest()
-  # spawn nyaa_pantsu.fetchLatest()
-  # spawn yts.fetchLatest()
-  # spawn torrentdownloads.fetchLatest()
+  router apiRouter:
+    get "/":
+      resp "Torrentinim is running, bambino."
 
   let port = Port 5000
-  var server = initJester(api, settings=newSettings(port=port))
-  server.serve()
+  var jesterServer = initJester(apiRouter, settings=newSettings(port=port))
+  jesterServer.serve()

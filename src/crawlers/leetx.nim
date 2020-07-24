@@ -105,5 +105,8 @@ proc fetchLatest*() {.async} =
 
 proc startCrawl*() {.async} =
   while true:
-    await sleepAsync(10000)
-    await fetchLatest()  
+    try:
+      await fetchLatest()
+      await sleepAsync(10000)
+    except:
+      echo "[1337x] Crawler error, restarting..."

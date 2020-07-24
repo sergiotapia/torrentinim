@@ -6,20 +6,21 @@ import xmltree
 import os
 import strutils
 import filesize
+import asyncdispatch
 import "../torrents"
 import "../torrents/torrent"
 
-proc fetchXml(): XmlNode =
-  let client = newHttpClient()
-  let xml = client.getContent("https://www.torrentdownloads.me/rss.xml")
+proc fetchXml(): Future[XmlNode] {.async} =
+  let client = newAsyncHttpClient()
+  let xml = await client.getContent("https://www.torrentdownloads.me/rss.xml")
   let xmlStream = newStringStream(xml)
   client.close()
   return parseXML(xmlStream)
 
-proc fetchLatest*() =
+proc fetchLatest*() {.async} =
   echo "[torrentdownloads] Starting TorrentDownloads.me crawl"
 
-  var xmlRoot = fetchXml()
+  var xmlRoot = await fetchXml()
   for item_node in xmlRoot.child("channel").findAll("item"):
     var torrent: Torrent = newTorrent()
     torrent.name = item_node.child("title").innerText()
@@ -34,8 +35,10 @@ proc fetchLatest*() =
 
     discard insert_torrent(torrent)
 
-  sleep(30000)
-  fetchLatest()
-
-proc start_crawl*() =
-  fetchLatest()
+proc startCrawl*() {.async} =
+  while true:
+    try:
+      await fetchLatest()
+      await sleepAsync(30000)
+    except:
+      echo "[torrentdownloads] Crawler error, restarting..."
