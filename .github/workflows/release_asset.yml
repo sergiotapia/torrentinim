@@ -31,8 +31,7 @@ jobs:
           assets="${{ env.APP_NAME }}_$(echo "${{ runner.os }}" | tr '[:upper:]' '[:lower:]')"
           echo "$assets"
           mkdir -p "dist/$assets"
-          cp -r bin "dist/$assets/"
-          cp README.md LICENSE "dist/$assets/"
+          cp torrentinim torrentinim-data.db README.md LICENSE "dist/$assets/"
           (
             cd dist
             if [[ "${{ runner.os }}" == Windows ]]; then
