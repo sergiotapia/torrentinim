@@ -8,7 +8,7 @@ import json
 proc initRequested*(): bool =
   let params = commandLineParams()
   if (params.len > 0):
-    result = params[0] == "init"
+    result = params[0] == "nuke_my_database"
   else:
     result = false
 

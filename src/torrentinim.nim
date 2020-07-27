@@ -1,6 +1,8 @@
+import os
 import htmlgen
 import jester
 import threadpool
+import strutils
 import "database"
 import "./helpers/datetime"
 from "./crawlers/eztv" import nil
@@ -25,7 +27,7 @@ when isMainModule:
     get "/":
       resp "Torrentinim is running, bambino."
 
-  let port = Port 5000
+  let port = Port getEnv("TORRENTINIM_PORT", "50123").parseInt()
   var jesterServer = initJester(apiRouter, settings=newSettings(port=port))
   jesterServer.serve()
   
