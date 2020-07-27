@@ -32,6 +32,7 @@ jobs:
           echo "$assets"
           mkdir -p "dist/$assets"
           cp README.md LICENSE
+          cp -r bin
           (
             cd dist
             if [[ "${{ runner.os }}" == Windows ]]; then
