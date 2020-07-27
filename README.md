@@ -2,9 +2,13 @@
 
 Torrentinim is a self-hosted API-only, low memory footprint, torrent search engine and crawler.
 
+Native support for Linux, Mac and Windows. [You can find a release for your platform in our releases](https://github.com/sergiotapia/torrentinim/releases).
+
+
 ### Goals
 
 - **API-only**
+- Native support for: Linux, Mac and Windows.
 - Crawl multiple index sites for torrents and magnet links.
 - **[TODO]** Easily integrates with both [Sonarr](https://github.com/Sonarr/Sonarr) and [Radarr](https://github.com/Radarr/Radarr).
 - Run without ceremony. You download a binary, run it, that's it.
