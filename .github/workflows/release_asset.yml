@@ -31,8 +31,8 @@ jobs:
           assets="${{ env.APP_NAME }}_$(echo "${{ runner.os }}" | tr '[:upper:]' '[:lower:]')"
           echo "$assets"
           mkdir -p "dist/$assets"
-          cp README.md LICENSE
-          cp -r bin
+          cp -r bin "dist/$assets/"
+          cp README.md LICENSE "dist/$assets/"
           (
             cd dist
             if [[ "${{ runner.os }}" == Windows ]]; then
