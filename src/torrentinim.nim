@@ -12,6 +12,7 @@ from "./crawlers/nyaa_pantsu.nim" import nil
 from "./crawlers/yts.nim" import nil
 from "./crawlers/torrent_downloads.nim" import nil
 from "./crawlers/nyaa_sukebei.nim" import nil
+from "./crawlers/thepiratebay.nim" import nil
 
 when isMainModule:
   if (initRequested()):
@@ -24,6 +25,7 @@ when isMainModule:
   asyncCheck nyaa_sukebei.startCrawl()
   asyncCheck yts.startCrawl()
   asyncCheck torrentdownloads.startCrawl()
+  asyncCheck thepiratebay.startCrawl()
   
   router apiRouter:
     get "/":
