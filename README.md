@@ -75,5 +75,6 @@ The following websites are fully supported.
 - EZTV
 - Nyaa
 - NyaaPantsu
+- NyaaSukebei
 - TorrentDownloads.me
 - YTS
