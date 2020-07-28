@@ -24,7 +24,7 @@ proc fetchLatest*() {.async} =
     var torrent: Torrent = newTorrent()
     torrent.name = item_node.child("title").innerText
     torrent.source = "nyaa"
-    torrent.canonical_url = item_node.child("link").innerText
+    torrent.canonical_url = item_node.child("guid").innerText
     torrent.seeders = parseInt(item_node.child("nyaa:seeders").innerText)
     torrent.leechers = parseInt(item_node.child("nyaa:leechers").innerText)
 
