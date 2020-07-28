@@ -78,3 +78,4 @@ The following websites are fully supported.
 - NyaaSukebei
 - TorrentDownloads.me
 - YTS
+- ThePirateBay
