@@ -1,3 +1,5 @@
+![image](https://user-images.githubusercontent.com/686715/93164356-53add180-f6e7-11ea-83ab-6cff289dab7e.png)
+
 # Torrentinim
 
 Torrentinim is a self-hosted API-only, low memory footprint, torrent search engine and crawler.
@@ -71,6 +73,7 @@ To compile release:
 
 The following websites are fully supported.
 
+- Rarbg 
 - 1337x.to
 - EZTV
 - Nyaa
@@ -79,3 +82,7 @@ The following websites are fully supported.
 - TorrentDownloads.me
 - YTS
 - ThePirateBay
+
+### Thank you's:
+
+- @chhdamian for the Torrentinim logo
