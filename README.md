@@ -51,6 +51,13 @@ You can specify the port using the `TORRENTINIM_PORT` environment variable.
 TORRENTINIM_PORT=60000 ./torrentinim
 ```
 
+Use the search JSON endpoint to perform searches against all the scraped torrents
+you have saved locally.
+
+```
+http://localhost:50123/search?query=the other guys&page=1
+```
+
 ### Community
 
 Want to talk about Torrentinim or suggest features? We have an official Discord server.
