@@ -24,7 +24,7 @@ jobs:
       - uses: jiro4989/setup-nim-action@v1
         with:
           nim-version: ${{ env.NIM_VERSION }}
-      - run: nimble build -Y -d:release
+      - run: nimble build -Y -d:release --verbose
       - name: Create artifact
         run: |
           os="${{ runner.os }}"
