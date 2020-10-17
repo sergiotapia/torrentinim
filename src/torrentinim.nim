@@ -3,8 +3,10 @@ import htmlgen
 import jester
 import threadpool
 import strutils
+import json
 import "database"
 import "./helpers/datetime"
+import "./torrents"
 from "./crawlers/eztv" import nil
 from "./crawlers/leetx.nim" import nil
 from "./crawlers/nyaa.nim" import nil
@@ -32,6 +34,13 @@ when isMainModule:
   router apiRouter:
     get "/":
       resp "Torrentinim is running, bambino."
+    get "/search":
+      cond @"query" != ""
+      cond @"page" != ""
+      let query = request.params["query"]
+      let page = request.params["page"]
+      let results = searchTorrents(query, page)
+      resp %results
 
   let port = Port getEnv("TORRENTINIM_PORT", "50123").parseInt()
   var jesterServer = initJester(apiRouter, settings=newSettings(port=port))

@@ -1,9 +1,5 @@
 import db_sqlite
 import os
-import strformat
-import strutils
-import times
-import json
 
 proc initRequested*(): bool =
   let params = commandLineParams()
@@ -33,6 +29,36 @@ proc initDatabase*(): string =
   db.exec(sql"""CREATE INDEX torrents_name ON torrents(name)""")
   db.exec(sql"""CREATE INDEX torrents_uploaded_at ON torrents(uploaded_at)""")
   db.exec(sql"""CREATE INDEX torrents_source ON torrents(source)""")
+
+  # Now we create the indexes for full-text search.
+  db.exec(sql"""CREATE VIRTUAL TABLE torrents_index USING fts5(name, tokenize=porter);""")
+
+  db.exec(sql"""
+  CREATE TRIGGER after_torrents_insert AFTER INSERT ON torrents BEGIN
+    INSERT INTO torrents_index (
+      rowid,
+      name
+    )
+    VALUES(
+      new.id,
+      new.name
+    );
+  END;
+  """)
+  
+
+  db.exec(sql"""
+  CREATE TRIGGER after_torrents_update UPDATE OF name ON torrents BEGIN
+    UPDATE torrents_index SET name = new.name WHERE rowid = old.id;
+  END;
+  """)
+
+  db.exec(sql"""
+  CREATE TRIGGER after_torrents_delete AFTER DELETE ON torrents BEGIN
+    DELETE FROM torrents_index WHERE rowid = old.id;
+  END;
+  """)
+
   db.close()
 
 # proc latest*(limit: int): seq[Torrent] =
