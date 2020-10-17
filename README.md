@@ -17,7 +17,7 @@ Native support for Linux, Mac and Windows. [You can find a release for your plat
 - Easy to understand source code. Special care is taken to keep code lean and understandable. No code golf here.
 - High performance, extremely low memory footprint.
   - RAM usage (avg.): **21.5MB**
-  - Binary application size: **1.2MB**
+  - Binary application size: **600KB**
 
 We work closely with other providers and search engines to be respectful of their
 hardware and minimize our impact to their systems. Want torrentinim to support your
