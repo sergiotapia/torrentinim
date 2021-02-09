@@ -1,9 +1,8 @@
 import os
-import htmlgen
-import jester
-import threadpool
-import strutils
 import json
+import prologue
+import strutils
+
 import "database"
 import "./helpers/datetime"
 import "./torrents"
@@ -30,19 +29,21 @@ when isMainModule:
   asyncCheck torrentdownloads.startCrawl()
   asyncCheck thepiratebay.startCrawl()
   asyncCheck rarbg.startCrawl()
-  
-  router apiRouter:
-    get "/":
-      resp "Torrentinim is running, bambino."
-    get "/search":
-      cond @"query" != ""
-      cond @"page" != ""
-      let query = request.params["query"]
-      let page = request.params["page"]
-      let results = searchTorrents(query, page)
-      resp %results
 
-  let port = Port getEnv("TORRENTINIM_PORT", "50123").parseInt()
-  var jesterServer = initJester(apiRouter, settings=newSettings(port=port))
-  jesterServer.serve()
+  let settings = newSettings(debug = false, port = Port(getEnv("TORRENTINIM_PORT", "50123").parseInt()))
+  var app = newApp(settings = settings)
+
+  proc hello*(ctx: Context) {.async.} =
+    resp "Torrentinim is running, bambino."
+
+  proc search*(ctx: Context) {.async.} =
+    let query = ctx.getQueryParams("query")
+    let page = ctx.getQueryParams("page")
+    let results = searchTorrents(query, page)
+    resp jsonResponse(%results)
   
+  app.addRoute("/", hello)
+  app.addRoute("/search", search)
+  app.run()
+
+  # runForever()
