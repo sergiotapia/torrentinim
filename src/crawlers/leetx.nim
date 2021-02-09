@@ -27,7 +27,7 @@ proc pageUrls(): seq[string] =
         &"https://1337x.to/cat/{category}/1/"
     )
 
-proc downloadUrl(url: string): Future[string] {.async} =
+proc downloadUrl(url: string): Future[string] {.async.} =
     echo &"[1337x] Download html: {url}"
     await sleepAsync(200)
     let client = newAsyncHttpClient()
@@ -46,7 +46,7 @@ proc extractTorrentLinks(html: string): seq[string] =
         &"https://1337x.to{link}"
     )
 
-proc extractTorrentInformation(link: string): Future[Torrent] {.async} =
+proc extractTorrentInformation(link: string): Future[Torrent] {.async.} =
     var torrent: Torrent = newTorrent()
 
     let torrentHtml = await downloadUrl(link)
@@ -90,7 +90,7 @@ proc extractTorrentInformation(link: string): Future[Torrent] {.async} =
 
     return torrent
 
-proc fetchLatest*() {.async} =
+proc fetchLatest*() {.async.} =
   echo "[1337x] Starting 1337x crawl"
   var pages = pageUrls()
   for url in pages:
@@ -100,7 +100,8 @@ proc fetchLatest*() {.async} =
       let torrent = await extractTorrentInformation(link)
       discard insert_torrent(torrent)
 
-proc startCrawl*() {.async} =
+proc startCrawl*() {.async.} =
+  echo "Doing it"
   while true:
     try:
       await fetchLatest()
