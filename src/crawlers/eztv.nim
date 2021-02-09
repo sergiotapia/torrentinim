@@ -9,7 +9,7 @@ import "../torrents/torrent"
 
 proc fetchXml(): Future[XmlNode] {.async} =
   let client = newAsyncHttpClient()
-  let xml = await client.getContent("https://eztv.io/ezrss.xml")
+  let xml = await client.getContent("https://eztv.re/ezrss.xml")
   let xmlStream = newStringStream(xml)
   client.close()
   return parseXML(xmlStream)

@@ -28,16 +28,16 @@ site? Please open a Github Issue in this repo.
 Torrentinim was designed to be painless to run. You download an executable, and run it. Done.
 It will start slurping up data from supported sources automatically.
 
-The `nuke_my_database` flag initializes the database. All subsequent runs should not 
-include `nuke_my_database` or you will nuke your entire database.
+The `NUKE_MY_DATABASE` environment variable initializes the database. All subsequent runs should not 
+include `NUKE_MY_DATABASE` or you will nuke your entire database.
 
 ```
-$ ./torrentinim nuke_my_database
+$ NUKE_MY_DATABASE=true ./torrentinim
 INFO Jester is making jokes at http://0.0.0.0:5000
 Starting 1 threads
 ```
 
-Subsequent runs, don't use the `nuke_my_database` flag!
+Subsequent runs, don't use the `NUKE_MY_DATABASE` flag!
 
 ```
 $ ./torrentinim
