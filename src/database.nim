@@ -1,12 +1,13 @@
 import db_sqlite
 import os
+import strutils
 
 proc initRequested*(): bool =
-  let params = commandLineParams()
-  if (params.len > 0):
-    result = params[0] == "nuke_my_database"
+  if getEnv("NUKE_MY_DATABASE", "false").parseBool():
+    echo "Database nuke requested. Clearing all database tables and data."
+    true
   else:
-    result = false
+    false
 
 proc initDatabase*(): string =
   let db = open("torrentinim-data.db", "", "", "")
