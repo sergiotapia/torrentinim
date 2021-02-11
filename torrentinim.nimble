@@ -1,6 +1,6 @@
 # Package
 
-version       = "0.2.0"
+version       = "0.2.1"
 author        = "Sergio Tapia"
 description   = "A very low memory-footprint, self hosted API-only torrent search engine. Sonarr + Radarr Compatible"
 license       = "MIT"
