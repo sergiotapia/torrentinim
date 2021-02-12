@@ -6,6 +6,7 @@ import strutils
 import "database"
 import "./helpers/datetime"
 import "./torrents"
+import "./torznab"
 from "./crawlers/eztv" import nil
 from "./crawlers/leetx.nim" import nil
 from "./crawlers/nyaa.nim" import nil
@@ -20,21 +21,25 @@ when isMainModule:
   if (initRequested()):
     discard initDatabase()
 
-  asyncCheck eztv.startCrawl()
-  asyncCheck leetx.startCrawl()
-  asyncCheck nyaa.startCrawl()
-  asyncCheck nyaa_pantsu.startCrawl()
-  asyncCheck nyaa_sukebei.startCrawl()
-  asyncCheck yts.startCrawl()
-  asyncCheck torrentdownloads.startCrawl()
-  asyncCheck thepiratebay.startCrawl()
-  asyncCheck rarbg.startCrawl()
+  # asyncCheck eztv.startCrawl()
+  # asyncCheck leetx.startCrawl()
+  # asyncCheck nyaa.startCrawl()
+  # asyncCheck nyaa_pantsu.startCrawl()
+  # asyncCheck nyaa_sukebei.startCrawl()
+  # asyncCheck yts.startCrawl()
+  # asyncCheck torrentdownloads.startCrawl()
+  # asyncCheck thepiratebay.startCrawl()
+  # asyncCheck rarbg.startCrawl()
 
   let settings = newSettings(debug = false, port = Port(getEnv("TORRENTINIM_PORT", "50123").parseInt()))
   var app = newApp(settings = settings)
 
   proc hello*(ctx: Context) {.async.} =
-    resp "Torrentinim is running, bambino."
+    if ctx.getQueryParams("t") == "caps":
+      ctx.response.setHeader("Content-Type", "text/xml")
+      resp torznabCaps()
+    else:
+      resp "Torrentinim is running, bambino."
 
   proc search*(ctx: Context) {.async.} =
     let query = ctx.getQueryParams("query")
