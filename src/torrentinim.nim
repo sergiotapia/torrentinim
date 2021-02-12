@@ -38,6 +38,9 @@ when isMainModule:
     if ctx.getQueryParams("t") == "caps":
       ctx.response.setHeader("Content-Type", "text/xml")
       resp torznabCaps()
+    elif ctx.getQueryParams("q") != "" and ctx.getQueryParams("page") != "":
+      ctx.response.setHeader("Content-Type", "text/xml")
+      resp torznabSearch(ctx.getQueryParams("q"), ctx.getQueryParams("page"))
     else:
       resp "Torrentinim is running, bambino."
 
