@@ -9,17 +9,14 @@ proc torznabCaps*(): string =
     <registration available="yes" open="yes" />
     <searching>
       <search available="yes" supportedParams="q" />
-      <tv-search available="yes" supportedParams="q,rid,tvmazeid,season,ep" />
+      <tv-search available="yes" supportedParams="q" />
       <movie-search available="no" supportedParams="q" />
     </searching>
     <!-- supported categories -->
     <categories>
-      <category id="1000" name="Console">
-        <subcat id="1010" name="NDS" />
-        <subcat id="1020" name="PSP" />
+      <category id="1000" name="TV">
       </category>
       <category id="2000" name="Movies">
-        <subcat id="2010" name="Foreign" />
       </category>
     </categories>
   </caps>
