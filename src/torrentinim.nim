@@ -45,5 +45,3 @@ when isMainModule:
   app.addRoute("/", hello)
   app.addRoute("/search", search)
   app.run()
-
-  # runForever()
