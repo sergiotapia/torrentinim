@@ -41,7 +41,13 @@ when isMainModule:
     let page = ctx.getQueryParams("page")
     let results = searchTorrents(query, page)
     resp jsonResponse(%results)
-  
+
+  proc hot*(ctx: Context) {.async.} =
+    let page = ctx.getQueryParams("page")
+    let results = hotTorrents(page)
+    resp jsonResponse(%results)
+      
   app.addRoute("/", hello)
   app.addRoute("/search", search)
+  app.addRoute("/hot", hot)
   app.run()

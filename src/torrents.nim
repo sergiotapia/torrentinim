@@ -51,3 +51,32 @@ proc searchTorrents*(query: string, page: string): seq[Torrent] =
       )
     )
   db.close()
+  
+proc hotTorrents*(page: string): seq[Torrent] =
+  let limit = 20
+  var offset = 0
+  if (parseInt(page) > 1):
+    offset = parseInt(page) * limit
+
+  let db = open("torrentinim-data.db", "", "", "")
+  let torrents = db.getAllRows(sql"""
+  SELECT name, uploaded_at, canonical_url, magnet_url, size, seeders, leechers
+  FROM torrents 
+  ORDER BY seeders DESC
+  LIMIT ?
+  OFFSET ?;
+  """, limit, offset)
+  
+  for row in torrents:
+    result.add(
+      Torrent(
+        name: row[0],
+        uploaded_at: parse(row[1], "yyyy-MM-dd'T'HH:mm:sszzz"),
+        canonical_url: row[2],
+        magnet_url: row[3],
+        size: row[4],
+        seeders: parseInt(row[5]),
+        leechers: parseInt(row[6]),
+      )
+    )
+  db.close()
