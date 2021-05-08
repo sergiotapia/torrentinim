@@ -16,6 +16,8 @@ from "./crawlers/nyaa_sukebei.nim" import nil
 from "./crawlers/thepiratebay.nim" import nil
 from "./crawlers/rarbg.nim" import nil
 
+import prologue/middlewares/cors
+
 when isMainModule:
   if (initRequested()):
     discard initDatabase()
@@ -47,6 +49,7 @@ when isMainModule:
     let results = hotTorrents(page)
     resp jsonResponse(%results)
       
+  app.use(CorsMiddleware(allowOrigins=@["http://incur.numag.net"]))
   app.addRoute("/", hello)
   app.addRoute("/search", search)
   app.addRoute("/hot", hot)
