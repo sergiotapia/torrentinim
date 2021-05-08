@@ -29,7 +29,7 @@ proc searchTorrents*(query: string, page: string): seq[Torrent] =
 
   let db = open("torrentinim-data.db", "", "", "")
   let torrents = db.getAllRows(sql"""
-  SELECT torrents.name, torrents.uploaded_at, torrents.canonical_url, torrents.magnet_url, torrents.size, torrents.seeders, torrents.leechers
+  SELECT torrents.name, torrents.source, torrents.uploaded_at, torrents.canonical_url, torrents.magnet_url, torrents.size, torrents.seeders, torrents.leechers
   FROM torrents_index 
   INNER JOIN torrents on torrents_index.rowid = torrents.id
   WHERE torrents_index MATCH ?
@@ -42,12 +42,13 @@ proc searchTorrents*(query: string, page: string): seq[Torrent] =
     result.add(
       Torrent(
         name: row[0],
-        uploaded_at: parse(row[1], "yyyy-MM-dd'T'HH:mm:sszzz"),
-        canonical_url: row[2],
-        magnet_url: row[3],
-        size: row[4],
-        seeders: parseInt(row[5]),
-        leechers: parseInt(row[6]),
+        source: row[1],
+        uploaded_at: parse(row[2], "yyyy-MM-dd'T'HH:mm:sszzz"),
+        canonical_url: row[3],
+        magnet_url: row[4],
+        size: row[5],
+        seeders: parseInt(row[6]),
+        leechers: parseInt(row[7]),
       )
     )
   db.close()
@@ -60,7 +61,7 @@ proc hotTorrents*(page: string): seq[Torrent] =
 
   let db = open("torrentinim-data.db", "", "", "")
   let torrents = db.getAllRows(sql"""
-  SELECT name, uploaded_at, canonical_url, magnet_url, size, seeders, leechers
+  SELECT name, source, uploaded_at, canonical_url, magnet_url, size, seeders, leechers
   FROM torrents 
   ORDER BY seeders DESC
   LIMIT ?
@@ -71,12 +72,13 @@ proc hotTorrents*(page: string): seq[Torrent] =
     result.add(
       Torrent(
         name: row[0],
-        uploaded_at: parse(row[1], "yyyy-MM-dd'T'HH:mm:sszzz"),
-        canonical_url: row[2],
-        magnet_url: row[3],
-        size: row[4],
-        seeders: parseInt(row[5]),
-        leechers: parseInt(row[6]),
+        source: row[1],
+        uploaded_at: parse(row[2], "yyyy-MM-dd'T'HH:mm:sszzz"),
+        canonical_url: row[3],
+        magnet_url: row[4],
+        size: row[5],
+        seeders: parseInt(row[6]),
+        leechers: parseInt(row[7]),
       )
     )
   db.close()
