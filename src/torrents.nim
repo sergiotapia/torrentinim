@@ -63,7 +63,7 @@ proc hotTorrents*(page: string): seq[Torrent] =
   let torrents = db.getAllRows(sql"""
   SELECT name, source, uploaded_at, canonical_url, magnet_url, size, seeders, leechers
   FROM torrents 
-  ORDER BY uploaded_at, seeders DESC
+  ORDER BY uploaded_at DESC, seeders DESC
   LIMIT ?
   OFFSET ?;
   """, limit, offset)
