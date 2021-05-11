@@ -49,7 +49,8 @@ when isMainModule:
     let results = hotTorrents(page)
     resp jsonResponse(%results)
       
-  app.use(CorsMiddleware(allowOrigins = @["http://incur.numag.net"]))
+  var allowOrigins = getEnv("ALLOW_ORIGINS", "http://incur.numag.net")
+  app.use(CorsMiddleware(allowOrigins = @[allowOrigins]))
   app.addRoute("/", hello)
   app.addRoute("/search", search)
   app.addRoute("/hot", hot)

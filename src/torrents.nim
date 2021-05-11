@@ -62,8 +62,9 @@ proc hotTorrents*(page: string): seq[Torrent] =
   let db = open("torrentinim-data.db", "", "", "")
   let torrents = db.getAllRows(sql"""
   SELECT name, source, uploaded_at, canonical_url, magnet_url, size, seeders, leechers
-  FROM torrents 
-  ORDER BY uploaded_at DESC, seeders DESC
+  FROM torrents
+  WHERE uploaded_at BETWEEN datetime('now', '-6 days') AND datetime('now', 'localtime'); 
+  ORDER BY seeders DESC
   LIMIT ?
   OFFSET ?;
   """, limit, offset)
