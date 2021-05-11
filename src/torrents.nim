@@ -63,7 +63,7 @@ proc hotTorrents*(page: string): seq[Torrent] =
   let torrents = db.getAllRows(sql"""
   SELECT name, source, uploaded_at, canonical_url, magnet_url, size, seeders, leechers
   FROM torrents
-  WHERE uploaded_at BETWEEN datetime('now', '-6 days') AND datetime('now', 'localtime'); 
+  WHERE uploaded_at BETWEEN datetime('now', '-6 days') AND datetime('now', 'localtime')
   ORDER BY seeders DESC
   LIMIT ?
   OFFSET ?;
