@@ -4,7 +4,7 @@ on: push
 
 env:
   APP_NAME: 'Torrentinim'
-  NIM_VERSION: '1.4.2'
+  NIM_VERSION: '1.4.6'
   MAINTAINER: 'Sergio Tapia'
 
 jobs:
