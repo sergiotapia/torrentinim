@@ -16,6 +16,8 @@ from "./crawlers/nyaa_sukebei.nim" import nil
 from "./crawlers/thepiratebay.nim" import nil
 from "./crawlers/rarbg.nim" import nil
 
+import prologue/middlewares/cors
+
 when isMainModule:
   if (initRequested()):
     discard initDatabase()
@@ -41,7 +43,15 @@ when isMainModule:
     let page = ctx.getQueryParams("page")
     let results = searchTorrents(query, page)
     resp jsonResponse(%results)
-  
+
+  proc hot*(ctx: Context) {.async.} =
+    let page = ctx.getQueryParams("page")
+    let results = hotTorrents(page)
+    resp jsonResponse(%results)
+      
+  var allowOrigins = getEnv("ALLOW_ORIGINS", "https://incur.numag.net")
+  app.use(CorsMiddleware(allowOrigins = @[allowOrigins]))
   app.addRoute("/", hello)
   app.addRoute("/search", search)
+  app.addRoute("/hot", hot)
   app.run()

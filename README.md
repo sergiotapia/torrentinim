@@ -51,6 +51,12 @@ You can specify the port using the `TORRENTINIM_PORT` environment variable.
 TORRENTINIM_PORT=60000 ./torrentinim
 ```
 
+You can specify CORS allowed origins using the `ALLOW_ORIGINS` environment variable.
+
+```
+ALLOW_ORIGINS="https://YOUR.DOMAIN" ./torrentinim
+```
+
 Use the search JSON endpoint to perform searches against all the scraped torrents
 you have saved locally.
 

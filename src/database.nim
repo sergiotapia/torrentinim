@@ -30,6 +30,8 @@ proc initDatabase*(): string =
   db.exec(sql"""CREATE INDEX torrents_name ON torrents(name)""")
   db.exec(sql"""CREATE INDEX torrents_uploaded_at ON torrents(uploaded_at)""")
   db.exec(sql"""CREATE INDEX torrents_source ON torrents(source)""")
+  db.exec(sql"""CREATE INDEX torrents_seeders ON torrents(seeders)""")
+  db.exec(sql"""CREATE INDEX torrents_leechers ON torrents(leechers)""")
 
   # Now we create the indexes for full-text search.
   db.exec(sql"""CREATE VIRTUAL TABLE torrents_index USING fts5(name, tokenize=porter);""")
