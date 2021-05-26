@@ -8,14 +8,14 @@ import asyncdispatch
 import "../torrents"
 import "../torrents/torrent"
 
-proc fetchXml(): Future[XmlNode] {.async} =
+proc fetchXml(): Future[XmlNode] {.async.} =
   let client = newAsyncHttpClient()
   let xml = await client.getContent("https://yts.am/rss")
   let xmlStream = newStringStream(xml)
   client.close()
   return parseXML(xmlStream)
 
-proc fetchLatest*() {.async} =
+proc fetchLatest*() {.async.} =
   echo "[yts] Starting YTS crawl"
 
   var xmlRoot = await fetchXml()
@@ -33,7 +33,7 @@ proc fetchLatest*() {.async} =
 
     discard insert_torrent(torrent)
 
-proc startCrawl*() {.async} =
+proc startCrawl*() {.async.} =
   while true:
     try:
       await fetchLatest()
