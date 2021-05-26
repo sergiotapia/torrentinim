@@ -3,3 +3,9 @@ torrentinim
 .DS_Store
 
 .vscode/
+
+nimcache/
+
+testresults/
+
+*.env

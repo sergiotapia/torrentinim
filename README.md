@@ -69,12 +69,12 @@ Want to talk about Torrentinim or suggest features? We have an official Discord 
 You need at least Nim 1.2.0
 
 1. Clone the project
-2. `nimble install`
-3. `nimble run torrentinim`
+2. `make deps`
+3. `make run`
 
 To compile release:
 
->nim c -d:danger -d:ssl --threads:on -d:release --opt:size src/torrentinim.nim
+1. `make build`
 
 ### Supported websites
 
