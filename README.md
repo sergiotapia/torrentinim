@@ -45,16 +45,15 @@ INFO Jester is making jokes at http://0.0.0.0:50123
 Starting 1 threads
 ```
 
-You can specify the port using the `TORRENTINIM_PORT` environment variable.
+Environment variables:
+
+- `TORRENTINIM_PORT` - what port the app will run on.
+- `ALLOW_ORIGINS` - CORS allowed origins.
+
+Example:
 
 ```
-TORRENTINIM_PORT=60000 ./torrentinim
-```
-
-You can specify CORS allowed origins using the `ALLOW_ORIGINS` environment variable.
-
-```
-ALLOW_ORIGINS="https://YOUR.DOMAIN" ./torrentinim
+TORRENTINIM_PORT=60000 ALLOW_ORIGINS="https://example.com" ./torrentinim
 ```
 
 Use the search JSON endpoint to perform searches against all the scraped torrents
