@@ -9,3 +9,5 @@ nimcache/
 testresults/
 
 *.env
+
+torrentinim-data.db-journal
