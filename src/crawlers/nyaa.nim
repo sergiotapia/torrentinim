@@ -1,4 +1,5 @@
 import httpClient
+import times
 import streams
 import strformat
 import xmlparser
@@ -17,7 +18,7 @@ proc fetchXml(): Future[XmlNode] {.async.} =
   return parseXML(xmlStream)
 
 proc fetchLatest*() {.async.} =
-  echo "[nyaa] Starting Nyaa crawl"
+  echo &"{now()} [nyaa] Starting Nyaa crawl"
 
   var xmlRoot = await fetchXml()
   for item_node in xmlRoot.child("channel").findAll("item"):
@@ -43,4 +44,4 @@ proc startCrawl*() {.async.} =
       await fetchLatest()
       await sleepAsync(30000)
     except:
-      echo "[nyaa] Crawler error, restarting..."
+      echo &"{now()} [nyaa] Crawler error, restarting..."

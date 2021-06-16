@@ -1,4 +1,5 @@
 import httpClient
+import times
 import streams
 import json
 import strformat
@@ -32,7 +33,7 @@ proc fetchJson(): Future[JsonNode] {.async.} =
   return parseJson(torrentsJsonStream)
 
 proc fetchLatest*() {.async.} =
-  echo "[rarbg] Starting Rarbg crawl"
+  echo &"{now()} [rarbg] Starting Rarbg crawl"
 
   var json = await fetchJson()
   for item in json["torrent_results"].items:
@@ -53,4 +54,4 @@ proc startCrawl*() {.async.} =
       await fetchLatest()
       await sleepAsync(30000)
     except:
-      echo "[rarbg] Crawler error, restarting..."
+      echo &"{now()} [rarbg] Crawler error, restarting..."

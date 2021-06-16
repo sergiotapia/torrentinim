@@ -1,4 +1,5 @@
 import httpClient
+import times
 import streams
 import json
 import strformat
@@ -15,7 +16,7 @@ proc fetchJson(): Future[JsonNode] {.async.} =
   return parseJson(jsonStream)
 
 proc fetchLatest*() {.async.} =
-  echo "[thepiratebay] Starting ThePirateBay crawl"
+  echo &"{now()} [thepiratebay] Starting ThePirateBay crawl"
 
   var json = await fetchJson()
   for item in json.items:
@@ -40,4 +41,4 @@ proc startCrawl*() {.async.} =
       await fetchLatest()
       await sleepAsync(30000)
     except:
-      echo "[thepiratebay] Crawler error, restarting..."
+      echo &"{now()} [thepiratebay] Crawler error, restarting..."

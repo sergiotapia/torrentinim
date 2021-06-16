@@ -12,7 +12,6 @@ from "./crawlers/nyaa.nim" import nil
 from "./crawlers/nyaa_pantsu.nim" import nil
 from "./crawlers/yts.nim" import nil
 from "./crawlers/torrent_downloads.nim" import nil
-from "./crawlers/nyaa_sukebei.nim" import nil
 from "./crawlers/thepiratebay.nim" import nil
 from "./crawlers/rarbg.nim" import nil
 
@@ -22,15 +21,14 @@ when isMainModule:
   if (initRequested()):
     discard initDatabase()
 
-  # asyncCheck eztv.startCrawl()
+  asyncCheck eztv.startCrawl()
   asyncCheck leetx.startCrawl()
-  # asyncCheck nyaa.startCrawl()
-  # asyncCheck nyaa_pantsu.startCrawl()
-  # asyncCheck nyaa_sukebei.startCrawl()
-  # asyncCheck yts.startCrawl()
-  # asyncCheck torrentdownloads.startCrawl()
-  # asyncCheck thepiratebay.startCrawl()
-  # asyncCheck rarbg.startCrawl()
+  asyncCheck nyaa.startCrawl()
+  asyncCheck nyaa_pantsu.startCrawl()
+  asyncCheck yts.startCrawl()
+  asyncCheck torrentdownloads.startCrawl()
+  asyncCheck thepiratebay.startCrawl()
+  asyncCheck rarbg.startCrawl()
 
   proc hello*(ctx: Context) {.async.} =
     resp "Torrentinim is running, bambino."
