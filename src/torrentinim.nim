@@ -3,6 +3,8 @@ import json
 import prologue
 import strutils
 
+import prologue/middlewares/cors
+
 import "database"
 import "./helpers/datetime"
 import "./torrents"
@@ -14,8 +16,6 @@ from "./crawlers/yts.nim" import nil
 from "./crawlers/torrent_downloads.nim" import nil
 from "./crawlers/thepiratebay.nim" import nil
 from "./crawlers/rarbg.nim" import nil
-
-import prologue/middlewares/cors
 
 when isMainModule:
   if (initRequested()):
