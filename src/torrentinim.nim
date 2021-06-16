@@ -22,18 +22,15 @@ when isMainModule:
   if (initRequested()):
     discard initDatabase()
 
-  asyncCheck eztv.startCrawl()
+  # asyncCheck eztv.startCrawl()
   asyncCheck leetx.startCrawl()
-  asyncCheck nyaa.startCrawl()
-  asyncCheck nyaa_pantsu.startCrawl()
-  asyncCheck nyaa_sukebei.startCrawl()
-  asyncCheck yts.startCrawl()
-  asyncCheck torrentdownloads.startCrawl()
-  asyncCheck thepiratebay.startCrawl()
-  asyncCheck rarbg.startCrawl()
-
-  let settings = newSettings(debug = false, port = Port(getEnv("TORRENTINIM_PORT", "50123").parseInt()))
-  var app = newApp(settings = settings)
+  # asyncCheck nyaa.startCrawl()
+  # asyncCheck nyaa_pantsu.startCrawl()
+  # asyncCheck nyaa_sukebei.startCrawl()
+  # asyncCheck yts.startCrawl()
+  # asyncCheck torrentdownloads.startCrawl()
+  # asyncCheck thepiratebay.startCrawl()
+  # asyncCheck rarbg.startCrawl()
 
   proc hello*(ctx: Context) {.async.} =
     resp "Torrentinim is running, bambino."
@@ -48,8 +45,10 @@ when isMainModule:
     let page = ctx.getQueryParams("page")
     let results = hotTorrents(page)
     resp jsonResponse(%results)
-      
+
   var allowOrigins = getEnv("ALLOW_ORIGINS", "")
+  let settings = newSettings(debug = false, port = Port(getEnv("TORRENTINIM_PORT", "50123").parseInt()))
+  var app = newApp(settings = settings)
   app.use(CorsMiddleware(allowOrigins = @[allowOrigins]))
   app.addRoute("/", hello)
   app.addRoute("/search", search)

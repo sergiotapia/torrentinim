@@ -1,4 +1,6 @@
 import httpClient
+import strformat
+import times
 import streams
 import xmlparser
 import xmltree
@@ -15,7 +17,7 @@ proc fetchXml(): Future[XmlNode] {.async.} =
   return parseXML(xmlStream)
 
 proc fetchLatest*() {.async.} =
-  echo "[eztv] Starting EZTV crawl"
+  echo &"{now()} [eztv] Starting EZTV crawl"
 
   var xmlRoot = await fetchXml()
   for item_node in xmlRoot.findAll("item"):
@@ -37,4 +39,4 @@ proc startCrawl*() {.async.} =
       await fetchLatest()
       await sleepAsync(30000)
     except:
-      echo "[eztv] Crawler error, restarting..."
+      echo &"{now()} [eztv] Crawler error, restarting..."

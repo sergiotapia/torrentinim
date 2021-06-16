@@ -1,4 +1,6 @@
 import httpClient
+import strformat
+import times
 import xmltree
 import sequtils
 import strformat
@@ -28,7 +30,7 @@ proc pageUrls(): seq[string] =
     )
 
 proc downloadUrl(url: string): Future[string] {.async.} =
-    echo &"[1337x] Download html: {url}"
+    echo &"{now()} [1337x] Download html: {url}"
     await sleepAsync(200)
     let client = newAsyncHttpClient()
     let content = await client.getContent(url)
@@ -91,7 +93,7 @@ proc extractTorrentInformation(link: string): Future[Torrent] {.async.} =
     return torrent
 
 proc fetchLatest*() {.async.} =
-  echo "[1337x] Starting 1337x crawl"
+  echo &"{now()} [1337x] Starting 1337x crawl"
   var pages = pageUrls()
   for url in pages:
     var categoryPageHtml = await downloadUrl(url)
@@ -107,4 +109,4 @@ proc startCrawl*() {.async.} =
       await fetchLatest()
       await sleepAsync(10000)
     except:
-      echo "[1337x] Crawler error, restarting..."
+      echo &"{now()} [1337x] Crawler error, restarting..."
