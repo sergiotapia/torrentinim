@@ -6,7 +6,6 @@ Torrentinim is a self-hosted API-only, low memory footprint, torrent search engi
 
 Native support for Linux, Mac and Windows. [You can find a release for your platform in our releases](https://github.com/sergiotapia/torrentinim/releases).
 
-
 ### Goals
 
 - **API-only**
@@ -74,8 +73,9 @@ Want to talk about Torrentinim or suggest features? We have an official Discord 
 You need at least Nim 1.2.0
 
 1. Clone the project
-2. `make deps`
-3. `make run`
+2. `asdf install` (to install the version of Nim in .tool-versions)
+3. `make deps`
+4. `make run`
 
 To compile release:
 
