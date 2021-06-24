@@ -4,7 +4,7 @@ import strutils
 
 proc initRequested*(): bool =
   if getEnv("NUKE_MY_DATABASE", "false").parseBool():
-    echo "Database nuke requested. Clearing all database tables and data."
+    echo "[system] Database nuke requested. Clearing all database tables and data."
     true
   else:
     false
@@ -15,7 +15,7 @@ proc initDatabase*(): string =
   db.exec(sql"DROP TABLE IF EXISTS torrents")
   db.exec(sql"DROP TABLE IF EXISTS torrents_index")
   db.exec(sql"PRAGMA case_sensitive_like = true;")
-  echo "[database] Initializing database"
+  echo "[system] Initializing database"
   db.exec(sql"""CREATE TABLE IF NOT EXISTS torrents (
                   id            INTEGER PRIMARY KEY,
                   uploaded_at   DATETIME NOT NULL,

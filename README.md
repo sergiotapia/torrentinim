@@ -32,16 +32,16 @@ include `NUKE_MY_DATABASE` or you will nuke your entire database.
 
 ```
 $ NUKE_MY_DATABASE=true ./torrentinim
-INFO Jester is making jokes at http://0.0.0.0:5000
-Starting 1 threads
+[system] Database nuke requested. Clearing all database tables and data.
+[system] Initializing database
+Torrentinim is running, bambino. http://localhost:50123
 ```
 
 Subsequent runs, don't use the `NUKE_MY_DATABASE` flag!
 
 ```
 $ ./torrentinim
-INFO Jester is making jokes at http://0.0.0.0:50123
-Starting 1 threads
+Torrentinim is running, bambino. http://localhost:50123
 ```
 
 Environment variables:
@@ -85,15 +85,14 @@ To compile release:
 
 The following websites are fully supported.
 
-- Rarbg 
-- 1337x.to
-- EZTV
-- Nyaa
-- NyaaPantsu
-- NyaaSukebei
-- TorrentDownloads.me
-- YTS
-- ThePirateBay
+- eztv
+- 1337x
+- nyaa pantsu
+- nyaa
+- rarbg
+- thepiratebay
+- torrentdownloads.me
+- yts
 
 ### Thank you's:
 
