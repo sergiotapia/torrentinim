@@ -2,6 +2,7 @@ import os
 import json
 import prologue
 import strutils
+import strformat
 
 import prologue/middlewares/cors
 
@@ -45,10 +46,14 @@ when isMainModule:
     resp jsonResponse(%results)
 
   var allowOrigins = getEnv("ALLOW_ORIGINS", "")
-  let settings = newSettings(debug = false, port = Port(getEnv("TORRENTINIM_PORT", "50123").parseInt()))
+  let port = getEnv("TORRENTINIM_PORT", "50123").parseInt()
+  let settings = newSettings(debug = false, port = Port(port))
   var app = newApp(settings = settings)
   app.use(CorsMiddleware(allowOrigins = @[allowOrigins]))
   app.addRoute("/", hello)
   app.addRoute("/search", search)
   app.addRoute("/hot", hot)
+
+  echo &"Torrentinim is running, bambino. http://localhost:{port}"
   app.run()
+  

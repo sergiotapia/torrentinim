@@ -103,7 +103,6 @@ proc fetchLatest*() {.async.} =
       discard insert_torrent(torrent)
 
 proc startCrawl*() {.async.} =
-  echo "Doing it"
   while true:
     try:
       await fetchLatest()
