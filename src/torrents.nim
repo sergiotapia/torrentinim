@@ -32,11 +32,11 @@ proc searchTorrents*(query: string, page: string): seq[Torrent] =
   SELECT torrents.name, torrents.source, torrents.uploaded_at, torrents.canonical_url, torrents.magnet_url, torrents.size, torrents.seeders, torrents.leechers
   FROM torrents_index 
   INNER JOIN torrents on torrents_index.rowid = torrents.id
-  WHERE torrents_index MATCH ?
+  WHERE torrents_index.name like ?
   ORDER BY rank
   LIMIT ?
   OFFSET ?;
-  """, &"name:{query.escape()}", limit, offset)
+  """, &"%{query}%", limit, offset)
   
   for row in torrents:
     result.add(
