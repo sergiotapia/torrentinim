@@ -15,7 +15,7 @@ proc initDatabase*(): string =
   db.exec(sql"DROP TABLE IF EXISTS torrents")
   db.exec(sql"DROP TABLE IF EXISTS torrents_index")
   db.exec(sql"PRAGMA case_sensitive_like = true;")
-  db.exec(sql"PRAGMA encoding = UTF-8;")
+  db.exec(sql"PRAGMA encoding = 'UTF-8';")
 
   echo "[system] Initializing database"
   db.exec(sql"""CREATE TABLE IF NOT EXISTS torrents (
