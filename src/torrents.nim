@@ -21,11 +21,11 @@ proc insert_torrent*(torrent: Torrent): bool =
   ) != -1
   db.close()
 
-proc searchTorrents*(query: string, page: string): seq[Torrent] =
+proc searchTorrents*(query: string, page: int): seq[Torrent] =
   let limit = 20
   var offset = 0
-  if (parseInt(page) > 1):
-    offset = parseInt(page) * limit
+  if page > 1:
+    offset = page * limit
 
   let db = open("torrentinim-data.db", "", "", "")
   let torrents = db.getAllRows(sql"""
@@ -53,11 +53,11 @@ proc searchTorrents*(query: string, page: string): seq[Torrent] =
     )
   db.close()
   
-proc hotTorrents*(page: string): seq[Torrent] =
+proc hotTorrents*(page: int): seq[Torrent] =
   let limit = 20
   var offset = 0
-  if (parseInt(page) > 1):
-    offset = parseInt(page) * limit
+  if page > 1:
+    offset = page * limit
 
   let db = open("torrentinim-data.db", "", "", "")
   let torrents = db.getAllRows(sql"""
