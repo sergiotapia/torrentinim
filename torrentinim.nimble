@@ -1,6 +1,6 @@
 # Package
 
-version       = "0.3.1"
+version       = "0.4.0"
 author        = "Sergio Tapia"
 description   = "A very low memory-footprint, self hosted API-only torrent search engine. Sonarr + Radarr Compatible"
 license       = "MIT"
@@ -11,7 +11,7 @@ bin           = @["torrentinim"]
 
 # Dependencies
 
-requires "nim >= 1.4.6"
-requires "nimquery >= 1.2.2"
+requires "nim >= 1.6.4"
+requires "nimquery >= 1.2.3"
 requires "filesize >= 1.0.0"
-requires "prologue >= 0.4.4"
+requires "prologue >= 0.5.6"
