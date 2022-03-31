@@ -56,8 +56,15 @@ proc searchTorrents*(query: string, page: string): seq[Torrent] =
 proc hotTorrents*(page: string): seq[Torrent] =
   let limit = 20
   var offset = 0
-  if (parseInt(page) > 1):
-    offset = parseInt(page) * limit
+
+  try: 
+    let pageInt = parseInt(page)
+    if (pageInt > 1):
+      offset = (pageInt - 1) * limit
+  except ValueError:
+    offset = 0
+
+  echo &"We're searching with offset: {offset}"
 
   let db = open("torrentinim-data.db", "", "", "")
   let torrents = db.getAllRows(sql"""
