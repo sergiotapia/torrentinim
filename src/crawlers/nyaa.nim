@@ -36,7 +36,10 @@ proc fetchLatest*() {.async.} =
     removeSuffix(rawSize, ".00")
     torrent.size = rawSize
 
-    discard insert_torrent(torrent)
+    if insert_torrent(torrent):
+      echo &"{now()} [{torrent.source}] Insert successful: {torrent.name}"
+    else:
+      echo &"{now()} [{torrent.source}] Insert not successful: {torrent.name}"
 
 proc startCrawl*() {.async.} =
   while true:

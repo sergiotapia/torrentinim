@@ -46,7 +46,10 @@ proc fetchLatest*() {.async.} =
     torrent.magnet_url = item["download"].getStr()
     torrent.canonical_url = item["info_page"].getStr()
     
-    discard insert_torrent(torrent)
+    if insert_torrent(torrent):
+      echo &"{now()} [{torrent.source}] Insert successful: {torrent.name}"
+    else:
+      echo &"{now()} [{torrent.source}] Insert not successful: {torrent.name}"
 
 proc startCrawl*() {.async.} =
   while true:

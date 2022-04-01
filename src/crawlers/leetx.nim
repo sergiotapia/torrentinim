@@ -98,9 +98,14 @@ proc fetchLatest*() {.async.} =
   for url in pages:
     var categoryPageHtml = await downloadUrl(url)
     var torrentLinks = extractTorrentLinks(categoryPageHtml)
+
     for link in torrentLinks:
       let torrent = await extractTorrentInformation(link)
-      discard insert_torrent(torrent)
+
+      if insert_torrent(torrent):
+        echo &"{now()} [{torrent.source}] Insert successful: {torrent.name}"
+      else:
+        echo &"{now()} [{torrent.source}] Insert not successful: {torrent.name}"
 
 proc startCrawl*() {.async.} =
   while true:
