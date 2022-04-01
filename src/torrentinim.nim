@@ -22,41 +22,37 @@ when isMainModule:
   if (initRequested()):
     discard initDatabase()
 
-  asyncCheck eztv.startCrawl()
-  asyncCheck leetx.startCrawl()
-  asyncCheck nyaa.startCrawl()
-  asyncCheck nyaa_pantsu.startCrawl()
-  asyncCheck yts.startCrawl()
-  asyncCheck torrentdownloads.startCrawl()
-  asyncCheck thepiratebay.startCrawl()
-  asyncCheck rarbg.startCrawl()
+  # asyncCheck eztv.startCrawl()
+  # asyncCheck leetx.startCrawl()
+  # asyncCheck nyaa.startCrawl()
+  # asyncCheck nyaa_pantsu.startCrawl()
+  # asyncCheck yts.startCrawl()
+  # asyncCheck torrentdownloads.startCrawl()
+  # asyncCheck thepiratebay.startCrawl()
+  # asyncCheck rarbg.startCrawl()
 
   proc hello*(ctx: Context) {.async.} =
     resp "Torrentinim is running, bambino."
 
-  proc getPage(ctx: Context): Option[int] =
-    let s = ctx.getQueryParams("page")
+  proc getQueryParamOrDefault(ctx: Context, queryParam: string, defaultValue: int): int =
+    let value = ctx.getQueryParams(queryParam)
+    
+    if value == "":
+      result = 0          
+
     try:
-      result = some(parseInt(s))
+      result = parseInt(value)
     except ValueError as e:
-      resp fmt"bad page param: {e.msg}", Http400
+      result = 0
 
   proc search*(ctx: Context) {.async.} =
     let query = ctx.getQueryParams("query")
-    let page =
-      try:
-        getPage(ctx).get
-      except UnpackDefect:
-        return
+    let page = getQueryParamOrDefault(ctx, "page", 0)
     let results = searchTorrents(query, page)
     resp jsonResponse(%results)
 
   proc hot*(ctx: Context) {.async.} =
-    let page =
-      try:
-        getPage(ctx).get
-      except UnpackDefect:
-        return
+    let page = getQueryParamOrDefault(ctx, "page", 0)    
     let results = hotTorrents(page)
     resp jsonResponse(%results)
 
