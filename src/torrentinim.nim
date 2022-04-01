@@ -34,14 +34,29 @@ when isMainModule:
   proc hello*(ctx: Context) {.async.} =
     resp "Torrentinim is running, bambino."
 
+  proc getPage(ctx: Context): Option[int] =
+    let s = ctx.getQueryParams("page")
+    try:
+      result = some(parseInt(s))
+    except ValueError as e:
+      resp fmt"bad page param: {e.msg}", Http400
+
   proc search*(ctx: Context) {.async.} =
     let query = ctx.getQueryParams("query")
-    let page = ctx.getQueryParams("page")
+    let page =
+      try:
+        getPage(ctx).get
+      except UnpackDefect:
+        return
     let results = searchTorrents(query, page)
     resp jsonResponse(%results)
 
   proc hot*(ctx: Context) {.async.} =
-    let page = ctx.getQueryParams("page")
+    let page =
+      try:
+        getPage(ctx).get
+      except UnpackDefect:
+        return
     let results = hotTorrents(page)
     resp jsonResponse(%results)
 
