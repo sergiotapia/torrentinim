@@ -22,14 +22,14 @@ when isMainModule:
   if (initRequested()):
     discard initDatabase()
 
-  # asyncCheck eztv.startCrawl()
-  # asyncCheck leetx.startCrawl()
-  # asyncCheck nyaa.startCrawl()
-  # asyncCheck nyaa_pantsu.startCrawl()
-  # asyncCheck yts.startCrawl()
-  # asyncCheck torrentdownloads.startCrawl()
-  # asyncCheck thepiratebay.startCrawl()
-  # asyncCheck rarbg.startCrawl()
+  asyncCheck eztv.startCrawl()
+  asyncCheck leetx.startCrawl()
+  asyncCheck nyaa.startCrawl()
+  asyncCheck nyaa_pantsu.startCrawl()
+  asyncCheck yts.startCrawl()
+  asyncCheck torrentdownloads.startCrawl()
+  asyncCheck thepiratebay.startCrawl()
+  asyncCheck rarbg.startCrawl()
 
   proc hello*(ctx: Context) {.async.} =
     resp "Torrentinim is running, bambino."
