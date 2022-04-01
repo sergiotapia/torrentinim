@@ -12,7 +12,6 @@ import "./torrents"
 from "./crawlers/eztv" import nil
 from "./crawlers/leetx.nim" import nil
 from "./crawlers/nyaa.nim" import nil
-from "./crawlers/nyaa_pantsu.nim" import nil
 from "./crawlers/yts.nim" import nil
 from "./crawlers/torrent_downloads.nim" import nil
 from "./crawlers/thepiratebay.nim" import nil
@@ -25,7 +24,6 @@ when isMainModule:
   asyncCheck eztv.startCrawl()
   asyncCheck leetx.startCrawl()
   asyncCheck nyaa.startCrawl()
-  asyncCheck nyaa_pantsu.startCrawl()
   asyncCheck yts.startCrawl()
   asyncCheck torrentdownloads.startCrawl()
   asyncCheck thepiratebay.startCrawl()
