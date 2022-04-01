@@ -56,9 +56,6 @@ proc searchTorrents*(query: string, page: int): seq[Torrent] =
 proc hotTorrents*(page: int): seq[Torrent] =
   let limit = 20
   var offset = 0
-  if page > 1:
-    offset = page * limit
-
   let db = open("torrentinim-data.db", "", "", "")
   let torrents = db.getAllRows(sql"""
   SELECT name, source, uploaded_at, canonical_url, magnet_url, size, seeders, leechers
