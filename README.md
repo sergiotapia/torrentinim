@@ -102,7 +102,6 @@ The following websites are fully supported.
 
 - eztv
 - 1337x
-- nyaa pantsu
 - nyaa
 - rarbg
 - thepiratebay
