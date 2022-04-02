@@ -12,4 +12,4 @@ type
     leechers*: int
 
 proc newTorrent*(): Torrent =
-  result = Torrent(uploaded_at: now())
+  result = Torrent(uploaded_at: now().utc)
