@@ -6,17 +6,23 @@ Torrentinim is a self-hosted API-only, low memory footprint, torrent search engi
 
 Native support for Linux, Mac and Windows. [You can find a release for your platform in our releases](https://github.com/sergiotapia/torrentinim/releases).
 
+### Community
+
+Want to talk about Torrentinim or suggest features? We have an official Discord server.
+
+[Click to join our official Discord server](https://discord.gg/CFtGUaW)
+
 ### Goals
 
 - **API-only**
 - Native support for: Linux, Mac and Windows.
 - Crawl multiple index sites for torrents and magnet links.
 - **[TODO]** Easily integrates with both [Sonarr](https://github.com/Sonarr/Sonarr) and [Radarr](https://github.com/Radarr/Radarr).
-- Run without ceremony. You download a binary, run it, that's it.
+- Run without ceremony. You download a binary, run it, that's it. Really.
 - Easy to understand source code. Special care is taken to keep code lean and understandable. No code golf here.
 - High performance, extremely low memory footprint.
-  - RAM usage (avg.): **21.5MB**
-  - Binary application size: **600KB**
+  - RAM usage (avg.): **24MB**
+  - Binary application size: **700KB**
 
 We work closely with other providers and search engines to be respectful of their
 hardware and minimize our impact to their systems. Want torrentinim to support your
@@ -62,12 +68,6 @@ you have saved locally.
 http://localhost:50123/search?query=the other guys&page=1
 ```
 
-### Community
-
-Want to talk about Torrentinim or suggest features? We have an official Discord server.
-
-[Click to join our official Discord server](https://discord.gg/CFtGUaW)
-
 ### Development
 
 You need at least Nim 1.2.0
@@ -81,7 +81,7 @@ To compile release:
 
 1. `make build`
 
-### Github Release
+### Github Releases
 
 1. Update `torrentinim.nimble` package version with the tag version.
 
@@ -112,3 +112,8 @@ The following websites are fully supported.
 ### Thank you's:
 
 - @chhdamian for the Torrentinim logo
+- @scroot
+- @srozb
+- @anacrolix
+- The Nim discord server and the people who volunteer their
+time.
