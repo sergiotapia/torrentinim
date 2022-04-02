@@ -81,6 +81,21 @@ To compile release:
 
 1. `make build`
 
+### Github Release
+
+1. Update `torrentinim.nimble` package version with the tag version.
+
+```
+version       = "0.4.0"
+git tag v0.4.0
+```
+
+2. Push up your tags
+
+```
+git push origin --tags
+```
+
 ### Supported websites
 
 The following websites are fully supported.
