@@ -1,7 +1,6 @@
 import db_sqlite
 import strformat
 import times
-import strformat
 import strutils
 import "./torrents/torrent"
 
