@@ -26,7 +26,7 @@ when isMainModule:
   asyncCheck nyaa.startCrawl()
   asyncCheck yts.startCrawl()
   asyncCheck torrentdownloads.startCrawl()
-  asyncCheck thepiratebay.startCrawl()
+  # asyncCheck thepiratebay.startCrawl()
   asyncCheck rarbg.startCrawl()
 
   proc hello*(ctx: Context) {.async.} =
