@@ -104,9 +104,12 @@ The following websites are fully supported.
 - 1337x
 - nyaa
 - rarbg
-- thepiratebay
 - torrentdownloads.me
 - yts
+
+These websites were supported but they have gone down.
+
+- thepiratebay
 
 ### Thank you's:
 
