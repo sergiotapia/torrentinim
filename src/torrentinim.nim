@@ -25,8 +25,7 @@ when isMainModule:
   asyncCheck leetx.startCrawl()
   asyncCheck nyaa.startCrawl()
   asyncCheck yts.startCrawl()
-  asyncCheck torrentdownloads.startCrawl()
-  # asyncCheck thepiratebay.startCrawl()
+  asyncCheck torrentdownloads.startCrawl()  
   asyncCheck rarbg.startCrawl()
 
   proc hello*(ctx: Context) {.async.} =

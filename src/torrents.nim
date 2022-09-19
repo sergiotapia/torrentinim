@@ -4,21 +4,27 @@ import times
 import strutils
 import "./torrents/torrent"
 
-proc insert_torrent*(torrent: Torrent): bool =
-  echo &"{now()} [{torrent.source}] Inserting torrent: {torrent.name}"
+proc insert_torrent*(torrent: Torrent): (bool, string) =
+  echo &"{now()} [{torrent.source}] Attempting to insert torrent: {torrent.name}"
 
   let db = open("torrentinim-data.db", "", "", "")
-  result = db.tryInsertID(sql"INSERT INTO torrents (uploaded_at, name, source, canonical_url, magnet_url, size, seeders, leechers) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
-    torrent.uploaded_at,
-    torrent.name,
-    torrent.source,
-    torrent.canonical_url,
-    torrent.magnet_url,
-    torrent.size,
-    torrent.seeders,
-    torrent.leechers
-  ) != -1
-  db.close()
+
+  try:
+    let id = db.insertID(sql"INSERT INTO torrents (uploaded_at, name, source, canonical_url, magnet_url, size, seeders, leechers) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+      torrent.uploaded_at,
+      torrent.name,
+      torrent.source,
+      torrent.canonical_url,
+      torrent.magnet_url,
+      torrent.size,
+      torrent.seeders,
+      torrent.leechers
+    )
+    result = (true, $id)
+  except DbError as e:
+    result = (false, e.msg)
+  finally:
+    db.close()
 
 proc searchTorrents*(query: string, page: int): seq[Torrent] =
   let limit = 20
