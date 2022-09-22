@@ -1,0 +1,2 @@
+fetchLatest	crawlers/rarbg.html#fetchLatest	rarbg: fetchLatest(): owned(Future[void])	
+startCrawl	crawlers/rarbg.html#startCrawl	rarbg: startCrawl(): owned(Future[void])	

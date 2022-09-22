@@ -1,0 +1,2 @@
+fetchLatest	crawlers/nyaa.html#fetchLatest	nyaa: fetchLatest(): owned(Future[void])	
+startCrawl	crawlers/nyaa.html#startCrawl	nyaa: startCrawl(): owned(Future[void])	

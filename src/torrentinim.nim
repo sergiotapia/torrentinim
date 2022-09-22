@@ -29,6 +29,9 @@ when isMainModule:
   asyncCheck rarbg.startCrawl()
 
   proc hello*(ctx: Context) {.async.} =
+    ## A simple hello endpoint to make sure Torrentinim
+    ## is running properly. Useful for healthchecks on production
+    ## deploys.
     resp "Torrentinim is running, bambino."
 
   proc getQueryParamOrDefault(ctx: Context, queryParam: string, defaultValue: int): int =
@@ -43,12 +46,18 @@ when isMainModule:
       result = 0
 
   proc search*(ctx: Context) {.async.} =
+    ## The search endpoint. Takes a query string parameter,
+    ## an optional int page parameter and returns an array
+    ## of JSON results.
     let query = ctx.getQueryParams("query")
     let page = getQueryParamOrDefault(ctx, "page", 0)
     let results = searchTorrents(query, page)
     resp jsonResponse(%results)
 
   proc hot*(ctx: Context) {.async.} =
+    ## The hot endpoint. Takes an int page parameter, and 
+    ## return an array of the hottest torrents determined
+    ## by most seeders in the last six days.
     let page = getQueryParamOrDefault(ctx, "page", 0)    
     let results = hotTorrents(page)
     resp jsonResponse(%results)

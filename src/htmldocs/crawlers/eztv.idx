@@ -1,0 +1,2 @@
+fetchLatest	crawlers/eztv.html#fetchLatest	eztv: fetchLatest(): owned(Future[void])	
+startCrawl	crawlers/eztv.html#startCrawl	eztv: startCrawl(): owned(Future[void])	

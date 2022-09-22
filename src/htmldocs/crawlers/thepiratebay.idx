@@ -1,0 +1,2 @@
+fetchLatest	crawlers/thepiratebay.html#fetchLatest	thepiratebay: fetchLatest(): owned(Future[void])	
+startCrawl	crawlers/thepiratebay.html#startCrawl	thepiratebay: startCrawl(): owned(Future[void])	
