@@ -70,7 +70,7 @@ http://localhost:50123/search?query=the other guys&page=1
 
 ### Development
 
-You need at least Nim 1.2.0
+You need at least Nim 1.6.4
 
 1. Clone the project
 2. `asdf install` (to install the version of Nim in .tool-versions)
