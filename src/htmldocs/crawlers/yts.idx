@@ -1,2 +1,0 @@
-fetchLatest	crawlers/yts.html#fetchLatest	yts: fetchLatest(): owned(Future[void])	
-startCrawl	crawlers/yts.html#startCrawl	yts: startCrawl(): owned(Future[void])	

@@ -1,2 +1,0 @@
-fetchLatest	crawlers/torrent_downloads.html#fetchLatest	torrent_downloads: fetchLatest(): owned(Future[void])	
-startCrawl	crawlers/torrent_downloads.html#startCrawl	torrent_downloads: startCrawl(): owned(Future[void])	

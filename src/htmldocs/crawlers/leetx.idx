@@ -1,2 +1,0 @@
-fetchLatest	crawlers/leetx.html#fetchLatest	leetx: fetchLatest(): owned(Future[void])	
-startCrawl	crawlers/leetx.html#startCrawl	leetx: startCrawl(): owned(Future[void])	

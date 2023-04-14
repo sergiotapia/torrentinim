@@ -1,3 +1,0 @@
-hello	torrentinim.html#hello,Context	torrentinim: hello(ctx: Context): owned(Future[void])	
-search	torrentinim.html#search,Context	torrentinim: search(ctx: Context): owned(Future[void])	
-hot	torrentinim.html#hot,Context	torrentinim: hot(ctx: Context): owned(Future[void])	

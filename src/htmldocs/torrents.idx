@@ -1,3 +1,0 @@
-insert_torrent	torrents.html#insert_torrent,Torrent	torrents: insert_torrent(torrent: Torrent): (bool, string)	
-searchTorrents	torrents.html#searchTorrents,string,int	torrents: searchTorrents(query: string; page: int): seq[Torrent]	
-hotTorrents	torrents.html#hotTorrents,int	torrents: hotTorrents(page: int): seq[Torrent]	
