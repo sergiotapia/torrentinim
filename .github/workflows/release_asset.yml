@@ -7,7 +7,7 @@ on:
 
 env:
   APP_NAME: 'Torrentinim'
-  NIM_VERSION: '1.6.4'
+  NIM_VERSION: '1.6.12'
   MAINTAINER: 'Sergio Tapia'
 
 jobs:
