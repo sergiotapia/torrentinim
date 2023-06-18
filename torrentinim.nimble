@@ -14,4 +14,4 @@ bin           = @["torrentinim"]
 requires "nim >= 1.6.12"
 requires "nimquery >= 1.2.3"
 requires "filesize >= 1.0.0"
-requires "prologue >= 0.5.6"
+requires "prologue >= 0.6.4"
