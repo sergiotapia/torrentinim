@@ -1,4 +1,4 @@
-FROM nimlang/nim:1.4.6-ubuntu
+FROM nimlang/nim:1.6.12-ubuntu
 
 ENV LANG C.UTF-8
 ENV LC_ALL C.UTF-8

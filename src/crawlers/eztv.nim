@@ -43,5 +43,6 @@ proc startCrawl*() {.async.} =
     try:
       await fetchLatest()
       await sleepAsync(30000)
-    except:
+    except CatchableError as e:
+      echo e.msg
       echo &"{now()} [eztv] Crawler error, restarting..."

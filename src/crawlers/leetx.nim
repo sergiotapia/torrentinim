@@ -3,7 +3,6 @@ import strformat
 import times
 import xmltree
 import sequtils
-import strformat
 import htmlparser
 import strtabs # To access XmlAttributes
 import strutils # To use cmpIgnoreCase
@@ -93,26 +92,27 @@ proc extractTorrentInformation(link: string): Future[Torrent] {.async.} =
     return torrent
 
 proc fetchLatest*() {.async.} =
-  echo &"{now()} [1337x] Starting 1337x crawl"
-  var pages = pageUrls()
-  for url in pages:
-    var categoryPageHtml = await downloadUrl(url)
-    var torrentLinks = extractTorrentLinks(categoryPageHtml)
+    echo &"{now()} [1337x] Starting 1337x crawl"
+    var pages = pageUrls()
+    for url in pages:
+        var categoryPageHtml = await downloadUrl(url)
+        var torrentLinks = extractTorrentLinks(categoryPageHtml)
 
-    for link in torrentLinks:
-      let torrent = await extractTorrentInformation(link)
+        for link in torrentLinks:
+            let torrent = await extractTorrentInformation(link)
 
-      let (insertSuccessful, msg) = insert_torrent(torrent)
+            let (insertSuccessful, msg) = insert_torrent(torrent)
 
-      if insertSuccessful:
-        echo &"{now()} [{torrent.source}] Insert successful: {torrent.name}"
-      else:
-        echo &"{now()} [{torrent.source}] Insert not successful: {torrent.name} - {msg}"
+            if insertSuccessful:
+                echo &"{now()} [{torrent.source}] Insert successful: {torrent.name}"
+            else:
+                echo &"{now()} [{torrent.source}] Insert not successful: {torrent.name} - {msg}"
 
 proc startCrawl*() {.async.} =
-  while true:
-    try:
-      await fetchLatest()
-      await sleepAsync(10000)
-    except:
-      echo &"{now()} [1337x] Crawler error, restarting..."
+    while true:
+        try:
+            await fetchLatest()
+            await sleepAsync(10000)
+        except CatchableError as e:
+            echo e.msg
+            echo &"{now()} [1337x] Crawler error, restarting..."

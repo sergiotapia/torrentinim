@@ -15,7 +15,6 @@ from "./crawlers/nyaa.nim" import nil
 from "./crawlers/yts.nim" import nil
 from "./crawlers/torrent_downloads.nim" import nil
 from "./crawlers/thepiratebay.nim" import nil
-from "./crawlers/rarbg.nim" import nil
 
 when isMainModule:
   if (initRequested()):
@@ -25,8 +24,7 @@ when isMainModule:
   asyncCheck leetx.startCrawl()
   asyncCheck nyaa.startCrawl()
   asyncCheck yts.startCrawl()
-  asyncCheck torrentdownloads.startCrawl()  
-  asyncCheck rarbg.startCrawl()
+  asyncCheck torrentdownloads.startCrawl()
 
   proc hello*(ctx: Context) {.async.} =
     ## A simple hello endpoint to make sure Torrentinim
@@ -34,11 +32,12 @@ when isMainModule:
     ## deploys.
     resp "Torrentinim is running, bambino."
 
-  proc getQueryParamOrDefault(ctx: Context, queryParam: string, defaultValue: int): int =
+  proc getQueryParamOrDefault(ctx: Context, queryParam: string,
+      defaultValue: int): int =
     let value = ctx.getQueryParams(queryParam)
-    
+
     if value == "":
-      result = 0          
+      result = 0
 
     try:
       result = parseInt(value)
@@ -55,10 +54,10 @@ when isMainModule:
     resp jsonResponse(%results)
 
   proc hot*(ctx: Context) {.async.} =
-    ## The hot endpoint. Takes an int page parameter, and 
+    ## The hot endpoint. Takes an int page parameter, and
     ## return an array of the hottest torrents determined
     ## by most seeders in the last six days.
-    let page = getQueryParamOrDefault(ctx, "page", 0)    
+    let page = getQueryParamOrDefault(ctx, "page", 0)
     let results = hotTorrents(page)
     resp jsonResponse(%results)
 
@@ -73,4 +72,4 @@ when isMainModule:
 
   echo &"Torrentinim is running, bambino. http://localhost:{port}"
   app.run()
-  
+

@@ -24,7 +24,8 @@ proc fetchLatest*() {.async.} =
     var torrent: Torrent = newTorrent()
     torrent.name = item_node.child("title").innerText()
     torrent.source = "torrentdownloads.me"
-    torrent.canonical_url = "https://torrentdownloads.me" & item_node.child("link").innerText()
+    torrent.canonical_url = "https://torrentdownloads.me" & item_node.child(
+        "link").innerText()
     torrent.seeders = item_node.child("seeders").innerText().parseInt()
     torrent.leechers = item_node.child("leechers").innerText().parseInt()
     torrent.size = item_node.child("size").innerText()
@@ -44,5 +45,6 @@ proc startCrawl*() {.async.} =
     try:
       await fetchLatest()
       await sleepAsync(30000)
-    except:
+    except CatchableError as e:
+      echo e.msg
       echo &"{now()} [torrentdownloads] Crawler error, restarting..."
